@@ -17,7 +17,10 @@ const notificationRoutes = require("./routes/notification.routes");
 const activityRoutes = require("./routes/activity.routes");
 
 const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
+app.use(cors({
+  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : "*",
+  credentials: true
+}));
 app.use(express.json());
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
